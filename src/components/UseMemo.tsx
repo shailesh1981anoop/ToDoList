@@ -4,6 +4,7 @@ import { Resolver, useForm } from "react-hook-form";
 import { Action } from "@remix-run/router";
 import { json } from "stream/consumers";
 import { TodoContext } from "./TodoContext";
+import Reset from "./Reset";
 
 export const initialState = [];
 type initialState = {
@@ -34,14 +35,9 @@ function reducer(state: any, action: any) {
         },
       ];
     case "DELETE_TASK":
-        // state.map((item: any) => {
           return state.filter((item: YourItemType) => item.id !== action.payload);
-
-          // if (item) {
-          //   return item.id !== action.paylod.id;
-          // } else return item;
-      //   }),
-      // ];
+          case 'RESET_TASK':
+            return init()
     default:
       return state;
   }
@@ -106,6 +102,7 @@ function UseMemo() {
             <input {...register("name")} placeholder="Enter name" />
             <button type="submit">Add Name</button>
           </form>
+          <Reset />
           {displaylist}
           {/* <button onClick={() => setCounter(count + 1)}>Count+</button> */}
         </TodoContext.Provider>
